@@ -1,10 +1,10 @@
 package com.vily.springboot_jpa_cache2.controller;
 
+import com.vily.springboot_jpa_cache2.bean.Student;
 import com.vily.springboot_jpa_cache2.bean.User;
+import com.vily.springboot_jpa_cache2.service.StudentService;
 import com.vily.springboot_jpa_cache2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/student")
+public class StudentController {
 
     /**
      *   cache:condition="#id>1":  id>1 才缓存
@@ -28,7 +28,7 @@ public class UserController {
      */
 
     @Autowired
-    private UserService mUserService;
+    private StudentService mStudentService;
 
     @Cacheable(value = "sss",key = "#value")
     @GetMapping(value = "/test")
@@ -39,31 +39,31 @@ public class UserController {
     }
 
 
-    @GetMapping(value = "/getUser")
-    public User getUser(@RequestParam("id")long id){
+    @GetMapping(value = "/getStudentById")
+    public Student getStudentById(@RequestParam("id")long id){
 
-        return mUserService.getUser(id);
+        return mStudentService.getStudentById(id);
     }
 
 
-    @GetMapping(value = "/updateUser")
-    public User updateUser(User user ){
+    @GetMapping(value = "/updateStudent")
+    public Student updateStudent(Student student ){
 
-        return mUserService.updateUser(user);
+        return mStudentService.updateStudent(student);
     }
 
-    @GetMapping(value = "/deleteUser")
-    public void deleteUser(@RequestParam("id")long id){
+    @GetMapping(value = "/deleteStudent")
+    public void deleteStudent(@RequestParam("id")long id){
 
-        Integer integer = mUserService.deleteUser(id);
+        Integer integer = mStudentService.deleteStudent(id);
         System.out.println("-----删除："+id+"---:"+integer);
     }
 
-    @GetMapping(value = "/getUserByName")
-    public User getUserByName(@RequestParam("name")String name){
+    @GetMapping(value = "/getStudentByName")
+    public Student getStudentByName(@RequestParam("name")String name){
 
         System.out.println("-----查询："+name);
 
-        return mUserService.getUserByName(name);
+        return mStudentService.getStudentByName(name);
     }
 }

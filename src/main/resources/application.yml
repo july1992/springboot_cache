@@ -19,8 +19,15 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
+  # 本地redis
+  redis:
+    host: 127.0.0.1
+  cache:
+      redis:
+        timeToLive: 1000000
 
 server:
   servlet:
     context-path: /cache
   port: 10011
+

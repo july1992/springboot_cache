@@ -1,5 +1,6 @@
 package com.vily.springboot_jpa_cache2.repository;
 
+import com.vily.springboot_jpa_cache2.bean.Student;
 import com.vily.springboot_jpa_cache2.bean.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,11 +11,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *  
  **/
 
-public interface UserRepository extends JpaRepository<User,String> {
+public interface StudentRepository extends JpaRepository<Student,String> {
 
-    User findUserById(Long id);
+    Student findUserById(Long id);
 
-    User findUserByName(String name);
+    Student findUserByName(String name);
 
     Integer deleteUserById(Long id);
 
